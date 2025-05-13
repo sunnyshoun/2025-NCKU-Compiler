@@ -1,0 +1,5 @@
+myscanner
+lex.* 
+test.rs
+.venv
+*.zip
