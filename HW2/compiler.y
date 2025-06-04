@@ -230,7 +230,7 @@ Literal
     : INT_LIT { printf("INT_LIT %d\n", $<i_val>1); $$ = "i32"; }
     | FLOAT_LIT { printf("FLOAT_LIT %f\n", $<f_val>1); $$ = "f32"; }
     | STRING_LIT { printf("STRING_LIT \"%s\"\n", $<s_val>1); $$ = "str"; }
-    | '"' '"' { printf("STRING_LIT \"\"\n", $<i_val>1); $$ = "str"; }
+    | '"' '"' { printf("STRING_LIT \"\"\n"); $$ = "str"; }
     | TRUE { printf("bool TRUE\n"); $$ = "bool"; }
     | FALSE { printf("bool FALSE\n"); $$ = "bool"; }
 ;
