@@ -3,5 +3,4 @@ lex.*
 test.rs
 .venv
 *.zip
-.log
-.j
+*.log

@@ -1,0 +1,2959 @@
+Terminals unused in grammar
+
+    FOR
+    LOOP
+    RETURN
+    BREAK
+    ARROW
+    IN
+    DOTDOT
+    RSHIFT
+
+
+State 61 conflicts: 1 shift/reduce
+State 62 conflicts: 1 shift/reduce
+State 67 conflicts: 2 shift/reduce
+State 110 conflicts: 1 shift/reduce
+State 111 conflicts: 1 shift/reduce
+State 112 conflicts: 1 shift/reduce
+State 113 conflicts: 1 shift/reduce
+State 114 conflicts: 1 shift/reduce
+State 115 conflicts: 1 shift/reduce
+State 117 conflicts: 15 shift/reduce
+State 118 conflicts: 1 shift/reduce
+State 119 conflicts: 1 shift/reduce
+State 120 conflicts: 1 shift/reduce
+State 121 conflicts: 1 shift/reduce
+State 122 conflicts: 1 shift/reduce
+State 123 conflicts: 1 shift/reduce
+State 124 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: Program $end
+
+    1 Program: GlobalStatementList
+
+    2 GlobalStatementList: GlobalStatementList GlobalStatement
+    3                    | GlobalStatement
+
+    4 GlobalStatement: FunctionDeclStmt
+    5                | NEWLINE
+
+    6 $@1: ε
+
+    7 FunctionDeclStmt: FUNC ID $@1 '(' ')' Block
+
+    8 $@2: ε
+
+    9 Block: '{' $@2 StatementList '}'
+
+   10 StatementList: StatementList Statement
+   11              | Statement
+
+   12 $@3: ε
+
+   13 $@4: ε
+
+   14 Statement: PRINTLN $@3 Expr $@4 ';'
+
+   15 $@5: ε
+
+   16 $@6: ε
+
+   17 Statement: PRINT $@5 Expr $@6 ';'
+   18          | VariableDecl ';'
+   19          | Assignment ';'
+   20          | IfStatement
+
+   21 $@7: ε
+
+   22 $@8: ε
+
+   23 Statement: WHILE $@7 Expr $@8 Block
+   24          | NEWLINE
+   25          | Block
+
+   26 $@9: ε
+
+   27 $@10: ε
+
+   28 IfStatement: IF Expr $@9 Block $@10 ElsePart
+
+   29 ElsePart: ELSE Block
+   30         | ε
+
+   31 VariableDecl: LET MUT ID ':' Type
+   32             | LET ID ':' Type
+   33             | LET MUT ID ':' Type '=' Expr
+   34             | LET ID ':' Type '=' Expr
+   35             | LET MUT ID '=' Expr
+   36             | LET ID '=' Expr
+
+   37 $@11: ε
+
+   38 Assignment: ID $@11 '=' Expr
+
+   39 $@12: ε
+
+   40 Assignment: ID $@12 ADD_ASSIGN Expr
+
+   41 $@13: ε
+
+   42 Assignment: ID $@13 SUB_ASSIGN Expr
+
+   43 $@14: ε
+
+   44 Assignment: ID $@14 MUL_ASSIGN Expr
+
+   45 $@15: ε
+
+   46 Assignment: ID $@15 DIV_ASSIGN Expr
+
+   47 $@16: ε
+
+   48 Assignment: ID $@16 REM_ASSIGN Expr
+
+   49 Expr: Literal
+   50     | ID
+
+   51 $@17: ε
+
+   52 Expr: ID $@17 '[' Expr ']'
+   53     | '-' Expr
+   54     | '!' Expr
+   55     | Expr '+' Expr
+   56     | Expr '-' Expr
+   57     | Expr '*' Expr
+   58     | Expr '/' Expr
+   59     | Expr '%' Expr
+   60     | Expr '>' Expr
+   61     | Expr '<' Expr
+   62     | Expr GEQ Expr
+   63     | Expr LEQ Expr
+   64     | Expr EQL Expr
+   65     | Expr NEQ Expr
+   66     | Expr LOR Expr
+   67     | Expr LAND Expr
+   68     | Expr LSHIFT Expr
+   69     | Expr AS Type
+   70     | '"' Expr '"'
+   71     | '(' Expr ')'
+   72     | '[' ArrayLiteral ']'
+
+   73 Literal: INT_LIT
+   74        | FLOAT_LIT
+   75        | STRING_LIT
+   76        | '"' '"'
+   77        | TRUE
+   78        | FALSE
+
+   79 ArrayLiteral: ArrayLiteral ',' Literal
+   80             | Literal
+
+   81 Type: INT
+   82     | FLOAT
+   83     | BOOL
+   84     | STR
+   85     | '&' Type
+   86     | '[' Type ';' Literal ']'
+
+
+Terminals, with rules where they appear
+
+    $end (0) 0
+    '!' (33) 54
+    '"' (34) 70 76
+    '%' (37) 59
+    '&' (38) 85
+    '(' (40) 7 71
+    ')' (41) 7 71
+    '*' (42) 57
+    '+' (43) 55
+    ',' (44) 79
+    '-' (45) 53 56
+    '/' (47) 58
+    ':' (58) 31 32 33 34
+    ';' (59) 14 17 18 19 86
+    '<' (60) 61
+    '=' (61) 33 34 35 36 38
+    '>' (62) 60
+    '[' (91) 52 72 86
+    ']' (93) 52 72 86
+    '{' (123) 9
+    '}' (125) 9
+    error (256)
+    LET (258) 31 32 33 34 35 36
+    MUT (259) 31 33 35
+    NEWLINE (260) 5 24
+    INT (261) 81
+    FLOAT (262) 82
+    BOOL (263) 83
+    STR (264) 84
+    TRUE (265) 77
+    FALSE (266) 78
+    GEQ (267) 62
+    LEQ (268) 63
+    EQL (269) 64
+    NEQ (270) 65
+    LOR (271) 66
+    LAND (272) 67
+    ADD_ASSIGN (273) 40
+    SUB_ASSIGN (274) 42
+    MUL_ASSIGN (275) 44
+    DIV_ASSIGN (276) 46
+    REM_ASSIGN (277) 48
+    IF (278) 28
+    ELSE (279) 29
+    FOR (280)
+    WHILE (281) 23
+    LOOP (282)
+    PRINT (283) 17
+    PRINTLN (284) 14
+    FUNC (285) 7
+    RETURN (286)
+    BREAK (287)
+    ARROW (288)
+    AS (289) 69
+    IN (290)
+    DOTDOT (291)
+    RSHIFT (292)
+    LSHIFT (293) 68
+    INT_LIT <i_val> (294) 73
+    FLOAT_LIT <f_val> (295) 74
+    STRING_LIT <s_val> (296) 75
+    ID <s_val> (297) 7 31 32 33 34 35 36 38 40 42 44 46 48 50 52
+    NEG (298)
+
+
+Nonterminals, with rules where they appear
+
+    $accept (64)
+        on left: 0
+    Program (65)
+        on left: 1
+        on right: 0
+    GlobalStatementList (66)
+        on left: 2 3
+        on right: 1 2
+    GlobalStatement (67)
+        on left: 4 5
+        on right: 2 3
+    FunctionDeclStmt (68)
+        on left: 7
+        on right: 4
+    $@1 (69)
+        on left: 6
+        on right: 7
+    Block (70)
+        on left: 9
+        on right: 7 23 25 28 29
+    $@2 (71)
+        on left: 8
+        on right: 9
+    StatementList (72)
+        on left: 10 11
+        on right: 9 10
+    Statement (73)
+        on left: 14 17 18 19 20 23 24 25
+        on right: 10 11
+    $@3 (74)
+        on left: 12
+        on right: 14
+    $@4 (75)
+        on left: 13
+        on right: 14
+    $@5 (76)
+        on left: 15
+        on right: 17
+    $@6 (77)
+        on left: 16
+        on right: 17
+    $@7 (78)
+        on left: 21
+        on right: 23
+    $@8 (79)
+        on left: 22
+        on right: 23
+    IfStatement (80)
+        on left: 28
+        on right: 20
+    $@9 (81)
+        on left: 26
+        on right: 28
+    $@10 (82)
+        on left: 27
+        on right: 28
+    ElsePart (83)
+        on left: 29 30
+        on right: 28
+    VariableDecl (84)
+        on left: 31 32 33 34 35 36
+        on right: 18
+    Assignment (85)
+        on left: 38 40 42 44 46 48
+        on right: 19
+    $@11 (86)
+        on left: 37
+        on right: 38
+    $@12 (87)
+        on left: 39
+        on right: 40
+    $@13 (88)
+        on left: 41
+        on right: 42
+    $@14 (89)
+        on left: 43
+        on right: 44
+    $@15 (90)
+        on left: 45
+        on right: 46
+    $@16 (91)
+        on left: 47
+        on right: 48
+    Expr <s_val> (92)
+        on left: 49 50 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72
+        on right: 14 17 23 28 33 34 35 36 38 40 42 44 46 48 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71
+    $@17 (93)
+        on left: 51
+        on right: 52
+    Literal <s_val> (94)
+        on left: 73 74 75 76 77 78
+        on right: 49 79 80 86
+    ArrayLiteral (95)
+        on left: 79 80
+        on right: 72 79
+    Type <s_val> (96)
+        on left: 81 82 83 84 85 86
+        on right: 31 32 33 34 69 85 86
+
+
+State 0
+
+    0 $accept: • Program $end
+
+    NEWLINE  shift, and go to state 1
+    FUNC     shift, and go to state 2
+
+    Program              go to state 3
+    GlobalStatementList  go to state 4
+    GlobalStatement      go to state 5
+    FunctionDeclStmt     go to state 6
+
+
+State 1
+
+    5 GlobalStatement: NEWLINE •
+
+    $default  reduce using rule 5 (GlobalStatement)
+
+
+State 2
+
+    7 FunctionDeclStmt: FUNC • ID $@1 '(' ')' Block
+
+    ID  shift, and go to state 7
+
+
+State 3
+
+    0 $accept: Program • $end
+
+    $end  shift, and go to state 8
+
+
+State 4
+
+    1 Program: GlobalStatementList •
+    2 GlobalStatementList: GlobalStatementList • GlobalStatement
+
+    NEWLINE  shift, and go to state 1
+    FUNC     shift, and go to state 2
+
+    $default  reduce using rule 1 (Program)
+
+    GlobalStatement   go to state 9
+    FunctionDeclStmt  go to state 6
+
+
+State 5
+
+    3 GlobalStatementList: GlobalStatement •
+
+    $default  reduce using rule 3 (GlobalStatementList)
+
+
+State 6
+
+    4 GlobalStatement: FunctionDeclStmt •
+
+    $default  reduce using rule 4 (GlobalStatement)
+
+
+State 7
+
+    7 FunctionDeclStmt: FUNC ID • $@1 '(' ')' Block
+
+    $default  reduce using rule 6 ($@1)
+
+    $@1  go to state 10
+
+
+State 8
+
+    0 $accept: Program $end •
+
+    $default  accept
+
+
+State 9
+
+    2 GlobalStatementList: GlobalStatementList GlobalStatement •
+
+    $default  reduce using rule 2 (GlobalStatementList)
+
+
+State 10
+
+    7 FunctionDeclStmt: FUNC ID $@1 • '(' ')' Block
+
+    '('  shift, and go to state 11
+
+
+State 11
+
+    7 FunctionDeclStmt: FUNC ID $@1 '(' • ')' Block
+
+    ')'  shift, and go to state 12
+
+
+State 12
+
+    7 FunctionDeclStmt: FUNC ID $@1 '(' ')' • Block
+
+    '{'  shift, and go to state 13
+
+    Block  go to state 14
+
+
+State 13
+
+    9 Block: '{' • $@2 StatementList '}'
+
+    $default  reduce using rule 8 ($@2)
+
+    $@2  go to state 15
+
+
+State 14
+
+    7 FunctionDeclStmt: FUNC ID $@1 '(' ')' Block •
+
+    $default  reduce using rule 7 (FunctionDeclStmt)
+
+
+State 15
+
+    9 Block: '{' $@2 • StatementList '}'
+
+    LET      shift, and go to state 16
+    NEWLINE  shift, and go to state 17
+    IF       shift, and go to state 18
+    WHILE    shift, and go to state 19
+    PRINT    shift, and go to state 20
+    PRINTLN  shift, and go to state 21
+    ID       shift, and go to state 22
+    '{'      shift, and go to state 13
+
+    Block          go to state 23
+    StatementList  go to state 24
+    Statement      go to state 25
+    IfStatement    go to state 26
+    VariableDecl   go to state 27
+    Assignment     go to state 28
+
+
+State 16
+
+   31 VariableDecl: LET • MUT ID ':' Type
+   32             | LET • ID ':' Type
+   33             | LET • MUT ID ':' Type '=' Expr
+   34             | LET • ID ':' Type '=' Expr
+   35             | LET • MUT ID '=' Expr
+   36             | LET • ID '=' Expr
+
+    MUT  shift, and go to state 29
+    ID   shift, and go to state 30
+
+
+State 17
+
+   24 Statement: NEWLINE •
+
+    $default  reduce using rule 24 (Statement)
+
+
+State 18
+
+   28 IfStatement: IF • Expr $@9 Block $@10 ElsePart
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 42
+    Literal  go to state 43
+
+
+State 19
+
+   23 Statement: WHILE • $@7 Expr $@8 Block
+
+    $default  reduce using rule 21 ($@7)
+
+    $@7  go to state 44
+
+
+State 20
+
+   17 Statement: PRINT • $@5 Expr $@6 ';'
+
+    $default  reduce using rule 15 ($@5)
+
+    $@5  go to state 45
+
+
+State 21
+
+   14 Statement: PRINTLN • $@3 Expr $@4 ';'
+
+    $default  reduce using rule 12 ($@3)
+
+    $@3  go to state 46
+
+
+State 22
+
+   38 Assignment: ID • $@11 '=' Expr
+   40           | ID • $@12 ADD_ASSIGN Expr
+   42           | ID • $@13 SUB_ASSIGN Expr
+   44           | ID • $@14 MUL_ASSIGN Expr
+   46           | ID • $@15 DIV_ASSIGN Expr
+   48           | ID • $@16 REM_ASSIGN Expr
+
+    ADD_ASSIGN  reduce using rule 39 ($@12)
+    SUB_ASSIGN  reduce using rule 41 ($@13)
+    MUL_ASSIGN  reduce using rule 43 ($@14)
+    DIV_ASSIGN  reduce using rule 45 ($@15)
+    REM_ASSIGN  reduce using rule 47 ($@16)
+    $default    reduce using rule 37 ($@11)
+
+    $@11  go to state 47
+    $@12  go to state 48
+    $@13  go to state 49
+    $@14  go to state 50
+    $@15  go to state 51
+    $@16  go to state 52
+
+
+State 23
+
+   25 Statement: Block •
+
+    $default  reduce using rule 25 (Statement)
+
+
+State 24
+
+    9 Block: '{' $@2 StatementList • '}'
+   10 StatementList: StatementList • Statement
+
+    LET      shift, and go to state 16
+    NEWLINE  shift, and go to state 17
+    IF       shift, and go to state 18
+    WHILE    shift, and go to state 19
+    PRINT    shift, and go to state 20
+    PRINTLN  shift, and go to state 21
+    ID       shift, and go to state 22
+    '{'      shift, and go to state 13
+    '}'      shift, and go to state 53
+
+    Block         go to state 23
+    Statement     go to state 54
+    IfStatement   go to state 26
+    VariableDecl  go to state 27
+    Assignment    go to state 28
+
+
+State 25
+
+   11 StatementList: Statement •
+
+    $default  reduce using rule 11 (StatementList)
+
+
+State 26
+
+   20 Statement: IfStatement •
+
+    $default  reduce using rule 20 (Statement)
+
+
+State 27
+
+   18 Statement: VariableDecl • ';'
+
+    ';'  shift, and go to state 55
+
+
+State 28
+
+   19 Statement: Assignment • ';'
+
+    ';'  shift, and go to state 56
+
+
+State 29
+
+   31 VariableDecl: LET MUT • ID ':' Type
+   33             | LET MUT • ID ':' Type '=' Expr
+   35             | LET MUT • ID '=' Expr
+
+    ID  shift, and go to state 57
+
+
+State 30
+
+   32 VariableDecl: LET ID • ':' Type
+   34             | LET ID • ':' Type '=' Expr
+   36             | LET ID • '=' Expr
+
+    ':'  shift, and go to state 58
+    '='  shift, and go to state 59
+
+
+State 31
+
+   77 Literal: TRUE •
+
+    $default  reduce using rule 77 (Literal)
+
+
+State 32
+
+   78 Literal: FALSE •
+
+    $default  reduce using rule 78 (Literal)
+
+
+State 33
+
+   73 Literal: INT_LIT •
+
+    $default  reduce using rule 73 (Literal)
+
+
+State 34
+
+   74 Literal: FLOAT_LIT •
+
+    $default  reduce using rule 74 (Literal)
+
+
+State 35
+
+   75 Literal: STRING_LIT •
+
+    $default  reduce using rule 75 (Literal)
+
+
+State 36
+
+   50 Expr: ID •
+   52     | ID • $@17 '[' Expr ']'
+
+    '['       reduce using rule 51 ($@17)
+    $default  reduce using rule 50 (Expr)
+
+    $@17  go to state 60
+
+
+State 37
+
+   53 Expr: '-' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 61
+    Literal  go to state 43
+
+
+State 38
+
+   54 Expr: '!' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 62
+    Literal  go to state 43
+
+
+State 39
+
+   71 Expr: '(' • Expr ')'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 63
+    Literal  go to state 43
+
+
+State 40
+
+   72 Expr: '[' • ArrayLiteral ']'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    '"'         shift, and go to state 64
+
+    Literal       go to state 65
+    ArrayLiteral  go to state 66
+
+
+State 41
+
+   70 Expr: '"' • Expr '"'
+   76 Literal: '"' • '"'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 67
+
+    Expr     go to state 68
+    Literal  go to state 43
+
+
+State 42
+
+   28 IfStatement: IF Expr • $@9 Block $@10 ElsePart
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 26 ($@9)
+
+    $@9  go to state 84
+
+
+State 43
+
+   49 Expr: Literal •
+
+    $default  reduce using rule 49 (Expr)
+
+
+State 44
+
+   23 Statement: WHILE $@7 • Expr $@8 Block
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 85
+    Literal  go to state 43
+
+
+State 45
+
+   17 Statement: PRINT $@5 • Expr $@6 ';'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 86
+    Literal  go to state 43
+
+
+State 46
+
+   14 Statement: PRINTLN $@3 • Expr $@4 ';'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 87
+    Literal  go to state 43
+
+
+State 47
+
+   38 Assignment: ID $@11 • '=' Expr
+
+    '='  shift, and go to state 88
+
+
+State 48
+
+   40 Assignment: ID $@12 • ADD_ASSIGN Expr
+
+    ADD_ASSIGN  shift, and go to state 89
+
+
+State 49
+
+   42 Assignment: ID $@13 • SUB_ASSIGN Expr
+
+    SUB_ASSIGN  shift, and go to state 90
+
+
+State 50
+
+   44 Assignment: ID $@14 • MUL_ASSIGN Expr
+
+    MUL_ASSIGN  shift, and go to state 91
+
+
+State 51
+
+   46 Assignment: ID $@15 • DIV_ASSIGN Expr
+
+    DIV_ASSIGN  shift, and go to state 92
+
+
+State 52
+
+   48 Assignment: ID $@16 • REM_ASSIGN Expr
+
+    REM_ASSIGN  shift, and go to state 93
+
+
+State 53
+
+    9 Block: '{' $@2 StatementList '}' •
+
+    $default  reduce using rule 9 (Block)
+
+
+State 54
+
+   10 StatementList: StatementList Statement •
+
+    $default  reduce using rule 10 (StatementList)
+
+
+State 55
+
+   18 Statement: VariableDecl ';' •
+
+    $default  reduce using rule 18 (Statement)
+
+
+State 56
+
+   19 Statement: Assignment ';' •
+
+    $default  reduce using rule 19 (Statement)
+
+
+State 57
+
+   31 VariableDecl: LET MUT ID • ':' Type
+   33             | LET MUT ID • ':' Type '=' Expr
+   35             | LET MUT ID • '=' Expr
+
+    ':'  shift, and go to state 94
+    '='  shift, and go to state 95
+
+
+State 58
+
+   32 VariableDecl: LET ID ':' • Type
+   34             | LET ID ':' • Type '=' Expr
+
+    INT    shift, and go to state 96
+    FLOAT  shift, and go to state 97
+    BOOL   shift, and go to state 98
+    STR    shift, and go to state 99
+    '['    shift, and go to state 100
+    '&'    shift, and go to state 101
+
+    Type  go to state 102
+
+
+State 59
+
+   36 VariableDecl: LET ID '=' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 103
+    Literal  go to state 43
+
+
+State 60
+
+   52 Expr: ID $@17 • '[' Expr ']'
+
+    '['  shift, and go to state 104
+
+
+State 61
+
+   53 Expr: '-' Expr •
+   55     | Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    LSHIFT  shift, and go to state 76
+
+    LSHIFT    [reduce using rule 53 (Expr)]
+    $default  reduce using rule 53 (Expr)
+
+
+State 62
+
+   54 Expr: '!' Expr •
+   55     | Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+
+    LSHIFT    [reduce using rule 54 (Expr)]
+    $default  reduce using rule 54 (Expr)
+
+
+State 63
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+   71     | '(' Expr • ')'
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+    ')'     shift, and go to state 105
+
+
+State 64
+
+   76 Literal: '"' • '"'
+
+    '"'  shift, and go to state 106
+
+
+State 65
+
+   80 ArrayLiteral: Literal •
+
+    $default  reduce using rule 80 (ArrayLiteral)
+
+
+State 66
+
+   72 Expr: '[' ArrayLiteral • ']'
+   79 ArrayLiteral: ArrayLiteral • ',' Literal
+
+    ']'  shift, and go to state 107
+    ','  shift, and go to state 108
+
+
+State 67
+
+   70 Expr: '"' • Expr '"'
+   76 Literal: '"' • '"'
+   76        | '"' '"' •
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 67
+
+    '-'       [reduce using rule 76 (Literal)]
+    '"'       [reduce using rule 76 (Literal)]
+    $default  reduce using rule 76 (Literal)
+
+    Expr     go to state 68
+    Literal  go to state 43
+
+
+State 68
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+   70     | '"' Expr • '"'
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+    '"'     shift, and go to state 109
+
+
+State 69
+
+   62 Expr: Expr GEQ • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 110
+    Literal  go to state 43
+
+
+State 70
+
+   63 Expr: Expr LEQ • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 111
+    Literal  go to state 43
+
+
+State 71
+
+   64 Expr: Expr EQL • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 112
+    Literal  go to state 43
+
+
+State 72
+
+   65 Expr: Expr NEQ • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 113
+    Literal  go to state 43
+
+
+State 73
+
+   66 Expr: Expr LOR • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 114
+    Literal  go to state 43
+
+
+State 74
+
+   67 Expr: Expr LAND • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 115
+    Literal  go to state 43
+
+
+State 75
+
+   69 Expr: Expr AS • Type
+
+    INT    shift, and go to state 96
+    FLOAT  shift, and go to state 97
+    BOOL   shift, and go to state 98
+    STR    shift, and go to state 99
+    '['    shift, and go to state 100
+    '&'    shift, and go to state 101
+
+    Type  go to state 116
+
+
+State 76
+
+   68 Expr: Expr LSHIFT • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 117
+    Literal  go to state 43
+
+
+State 77
+
+   60 Expr: Expr '>' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 118
+    Literal  go to state 43
+
+
+State 78
+
+   61 Expr: Expr '<' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 119
+    Literal  go to state 43
+
+
+State 79
+
+   55 Expr: Expr '+' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 120
+    Literal  go to state 43
+
+
+State 80
+
+   56 Expr: Expr '-' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 121
+    Literal  go to state 43
+
+
+State 81
+
+   57 Expr: Expr '*' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 122
+    Literal  go to state 43
+
+
+State 82
+
+   58 Expr: Expr '/' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 123
+    Literal  go to state 43
+
+
+State 83
+
+   59 Expr: Expr '%' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 124
+    Literal  go to state 43
+
+
+State 84
+
+   28 IfStatement: IF Expr $@9 • Block $@10 ElsePart
+
+    '{'  shift, and go to state 13
+
+    Block  go to state 125
+
+
+State 85
+
+   23 Statement: WHILE $@7 Expr • $@8 Block
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 22 ($@8)
+
+    $@8  go to state 126
+
+
+State 86
+
+   17 Statement: PRINT $@5 Expr • $@6 ';'
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 16 ($@6)
+
+    $@6  go to state 127
+
+
+State 87
+
+   14 Statement: PRINTLN $@3 Expr • $@4 ';'
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 13 ($@4)
+
+    $@4  go to state 128
+
+
+State 88
+
+   38 Assignment: ID $@11 '=' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 129
+    Literal  go to state 43
+
+
+State 89
+
+   40 Assignment: ID $@12 ADD_ASSIGN • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 130
+    Literal  go to state 43
+
+
+State 90
+
+   42 Assignment: ID $@13 SUB_ASSIGN • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 131
+    Literal  go to state 43
+
+
+State 91
+
+   44 Assignment: ID $@14 MUL_ASSIGN • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 132
+    Literal  go to state 43
+
+
+State 92
+
+   46 Assignment: ID $@15 DIV_ASSIGN • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 133
+    Literal  go to state 43
+
+
+State 93
+
+   48 Assignment: ID $@16 REM_ASSIGN • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 134
+    Literal  go to state 43
+
+
+State 94
+
+   31 VariableDecl: LET MUT ID ':' • Type
+   33             | LET MUT ID ':' • Type '=' Expr
+
+    INT    shift, and go to state 96
+    FLOAT  shift, and go to state 97
+    BOOL   shift, and go to state 98
+    STR    shift, and go to state 99
+    '['    shift, and go to state 100
+    '&'    shift, and go to state 101
+
+    Type  go to state 135
+
+
+State 95
+
+   35 VariableDecl: LET MUT ID '=' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 136
+    Literal  go to state 43
+
+
+State 96
+
+   81 Type: INT •
+
+    $default  reduce using rule 81 (Type)
+
+
+State 97
+
+   82 Type: FLOAT •
+
+    $default  reduce using rule 82 (Type)
+
+
+State 98
+
+   83 Type: BOOL •
+
+    $default  reduce using rule 83 (Type)
+
+
+State 99
+
+   84 Type: STR •
+
+    $default  reduce using rule 84 (Type)
+
+
+State 100
+
+   86 Type: '[' • Type ';' Literal ']'
+
+    INT    shift, and go to state 96
+    FLOAT  shift, and go to state 97
+    BOOL   shift, and go to state 98
+    STR    shift, and go to state 99
+    '['    shift, and go to state 100
+    '&'    shift, and go to state 101
+
+    Type  go to state 137
+
+
+State 101
+
+   85 Type: '&' • Type
+
+    INT    shift, and go to state 96
+    FLOAT  shift, and go to state 97
+    BOOL   shift, and go to state 98
+    STR    shift, and go to state 99
+    '['    shift, and go to state 100
+    '&'    shift, and go to state 101
+
+    Type  go to state 138
+
+
+State 102
+
+   32 VariableDecl: LET ID ':' Type •
+   34             | LET ID ':' Type • '=' Expr
+
+    '='  shift, and go to state 139
+
+    $default  reduce using rule 32 (VariableDecl)
+
+
+State 103
+
+   36 VariableDecl: LET ID '=' Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 36 (VariableDecl)
+
+
+State 104
+
+   52 Expr: ID $@17 '[' • Expr ']'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 140
+    Literal  go to state 43
+
+
+State 105
+
+   71 Expr: '(' Expr ')' •
+
+    $default  reduce using rule 71 (Expr)
+
+
+State 106
+
+   76 Literal: '"' '"' •
+
+    $default  reduce using rule 76 (Literal)
+
+
+State 107
+
+   72 Expr: '[' ArrayLiteral ']' •
+
+    $default  reduce using rule 72 (Expr)
+
+
+State 108
+
+   79 ArrayLiteral: ArrayLiteral ',' • Literal
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    '"'         shift, and go to state 64
+
+    Literal  go to state 141
+
+
+State 109
+
+   70 Expr: '"' Expr '"' •
+
+    $default  reduce using rule 70 (Expr)
+
+
+State 110
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   62     | Expr GEQ Expr •
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 62 (Expr)]
+    $default  reduce using rule 62 (Expr)
+
+
+State 111
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   63     | Expr LEQ Expr •
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 63 (Expr)]
+    $default  reduce using rule 63 (Expr)
+
+
+State 112
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   64     | Expr EQL Expr •
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 64 (Expr)]
+    $default  reduce using rule 64 (Expr)
+
+
+State 113
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   65     | Expr NEQ Expr •
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 65 (Expr)]
+    $default  reduce using rule 65 (Expr)
+
+
+State 114
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   66     | Expr LOR Expr •
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 66 (Expr)]
+    $default  reduce using rule 66 (Expr)
+
+
+State 115
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   67     | Expr LAND Expr •
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 67 (Expr)]
+    $default  reduce using rule 67 (Expr)
+
+
+State 116
+
+   69 Expr: Expr AS Type •
+
+    $default  reduce using rule 69 (Expr)
+
+
+State 117
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   68     | Expr LSHIFT Expr •
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    GEQ       [reduce using rule 68 (Expr)]
+    LEQ       [reduce using rule 68 (Expr)]
+    EQL       [reduce using rule 68 (Expr)]
+    NEQ       [reduce using rule 68 (Expr)]
+    LOR       [reduce using rule 68 (Expr)]
+    LAND      [reduce using rule 68 (Expr)]
+    AS        [reduce using rule 68 (Expr)]
+    LSHIFT    [reduce using rule 68 (Expr)]
+    '>'       [reduce using rule 68 (Expr)]
+    '<'       [reduce using rule 68 (Expr)]
+    '+'       [reduce using rule 68 (Expr)]
+    '-'       [reduce using rule 68 (Expr)]
+    '*'       [reduce using rule 68 (Expr)]
+    '/'       [reduce using rule 68 (Expr)]
+    '%'       [reduce using rule 68 (Expr)]
+    $default  reduce using rule 68 (Expr)
+
+
+State 118
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   60     | Expr '>' Expr •
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 60 (Expr)]
+    $default  reduce using rule 60 (Expr)
+
+
+State 119
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   61     | Expr '<' Expr •
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 61 (Expr)]
+    $default  reduce using rule 61 (Expr)
+
+
+State 120
+
+   55 Expr: Expr • '+' Expr
+   55     | Expr '+' Expr •
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 55 (Expr)]
+    $default  reduce using rule 55 (Expr)
+
+
+State 121
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   56     | Expr '-' Expr •
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    LSHIFT    [reduce using rule 56 (Expr)]
+    $default  reduce using rule 56 (Expr)
+
+
+State 122
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   57     | Expr '*' Expr •
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+
+    LSHIFT    [reduce using rule 57 (Expr)]
+    $default  reduce using rule 57 (Expr)
+
+
+State 123
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   58     | Expr '/' Expr •
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+
+    LSHIFT    [reduce using rule 58 (Expr)]
+    $default  reduce using rule 58 (Expr)
+
+
+State 124
+
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   59     | Expr '%' Expr •
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+
+    LSHIFT    [reduce using rule 59 (Expr)]
+    $default  reduce using rule 59 (Expr)
+
+
+State 125
+
+   28 IfStatement: IF Expr $@9 Block • $@10 ElsePart
+
+    $default  reduce using rule 27 ($@10)
+
+    $@10  go to state 142
+
+
+State 126
+
+   23 Statement: WHILE $@7 Expr $@8 • Block
+
+    '{'  shift, and go to state 13
+
+    Block  go to state 143
+
+
+State 127
+
+   17 Statement: PRINT $@5 Expr $@6 • ';'
+
+    ';'  shift, and go to state 144
+
+
+State 128
+
+   14 Statement: PRINTLN $@3 Expr $@4 • ';'
+
+    ';'  shift, and go to state 145
+
+
+State 129
+
+   38 Assignment: ID $@11 '=' Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 38 (Assignment)
+
+
+State 130
+
+   40 Assignment: ID $@12 ADD_ASSIGN Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 40 (Assignment)
+
+
+State 131
+
+   42 Assignment: ID $@13 SUB_ASSIGN Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 42 (Assignment)
+
+
+State 132
+
+   44 Assignment: ID $@14 MUL_ASSIGN Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 44 (Assignment)
+
+
+State 133
+
+   46 Assignment: ID $@15 DIV_ASSIGN Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 46 (Assignment)
+
+
+State 134
+
+   48 Assignment: ID $@16 REM_ASSIGN Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 48 (Assignment)
+
+
+State 135
+
+   31 VariableDecl: LET MUT ID ':' Type •
+   33             | LET MUT ID ':' Type • '=' Expr
+
+    '='  shift, and go to state 146
+
+    $default  reduce using rule 31 (VariableDecl)
+
+
+State 136
+
+   35 VariableDecl: LET MUT ID '=' Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 35 (VariableDecl)
+
+
+State 137
+
+   86 Type: '[' Type • ';' Literal ']'
+
+    ';'  shift, and go to state 147
+
+
+State 138
+
+   85 Type: '&' Type •
+
+    $default  reduce using rule 85 (Type)
+
+
+State 139
+
+   34 VariableDecl: LET ID ':' Type '=' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 148
+    Literal  go to state 43
+
+
+State 140
+
+   52 Expr: ID $@17 '[' Expr • ']'
+   55     | Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+    ']'     shift, and go to state 149
+
+
+State 141
+
+   79 ArrayLiteral: ArrayLiteral ',' Literal •
+
+    $default  reduce using rule 79 (ArrayLiteral)
+
+
+State 142
+
+   28 IfStatement: IF Expr $@9 Block $@10 • ElsePart
+
+    ELSE  shift, and go to state 150
+
+    $default  reduce using rule 30 (ElsePart)
+
+    ElsePart  go to state 151
+
+
+State 143
+
+   23 Statement: WHILE $@7 Expr $@8 Block •
+
+    $default  reduce using rule 23 (Statement)
+
+
+State 144
+
+   17 Statement: PRINT $@5 Expr $@6 ';' •
+
+    $default  reduce using rule 17 (Statement)
+
+
+State 145
+
+   14 Statement: PRINTLN $@3 Expr $@4 ';' •
+
+    $default  reduce using rule 14 (Statement)
+
+
+State 146
+
+   33 VariableDecl: LET MUT ID ':' Type '=' • Expr
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    ID          shift, and go to state 36
+    '-'         shift, and go to state 37
+    '!'         shift, and go to state 38
+    '('         shift, and go to state 39
+    '['         shift, and go to state 40
+    '"'         shift, and go to state 41
+
+    Expr     go to state 152
+    Literal  go to state 43
+
+
+State 147
+
+   86 Type: '[' Type ';' • Literal ']'
+
+    TRUE        shift, and go to state 31
+    FALSE       shift, and go to state 32
+    INT_LIT     shift, and go to state 33
+    FLOAT_LIT   shift, and go to state 34
+    STRING_LIT  shift, and go to state 35
+    '"'         shift, and go to state 64
+
+    Literal  go to state 153
+
+
+State 148
+
+   34 VariableDecl: LET ID ':' Type '=' Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 34 (VariableDecl)
+
+
+State 149
+
+   52 Expr: ID $@17 '[' Expr ']' •
+
+    $default  reduce using rule 52 (Expr)
+
+
+State 150
+
+   29 ElsePart: ELSE • Block
+
+    '{'  shift, and go to state 13
+
+    Block  go to state 154
+
+
+State 151
+
+   28 IfStatement: IF Expr $@9 Block $@10 ElsePart •
+
+    $default  reduce using rule 28 (IfStatement)
+
+
+State 152
+
+   33 VariableDecl: LET MUT ID ':' Type '=' Expr •
+   55 Expr: Expr • '+' Expr
+   56     | Expr • '-' Expr
+   57     | Expr • '*' Expr
+   58     | Expr • '/' Expr
+   59     | Expr • '%' Expr
+   60     | Expr • '>' Expr
+   61     | Expr • '<' Expr
+   62     | Expr • GEQ Expr
+   63     | Expr • LEQ Expr
+   64     | Expr • EQL Expr
+   65     | Expr • NEQ Expr
+   66     | Expr • LOR Expr
+   67     | Expr • LAND Expr
+   68     | Expr • LSHIFT Expr
+   69     | Expr • AS Type
+
+    GEQ     shift, and go to state 69
+    LEQ     shift, and go to state 70
+    EQL     shift, and go to state 71
+    NEQ     shift, and go to state 72
+    LOR     shift, and go to state 73
+    LAND    shift, and go to state 74
+    AS      shift, and go to state 75
+    LSHIFT  shift, and go to state 76
+    '>'     shift, and go to state 77
+    '<'     shift, and go to state 78
+    '+'     shift, and go to state 79
+    '-'     shift, and go to state 80
+    '*'     shift, and go to state 81
+    '/'     shift, and go to state 82
+    '%'     shift, and go to state 83
+
+    $default  reduce using rule 33 (VariableDecl)
+
+
+State 153
+
+   86 Type: '[' Type ';' Literal • ']'
+
+    ']'  shift, and go to state 155
+
+
+State 154
+
+   29 ElsePart: ELSE Block •
+
+    $default  reduce using rule 29 (ElsePart)
+
+
+State 155
+
+   86 Type: '[' Type ';' Literal ']' •
+
+    $default  reduce using rule 86 (Type)
